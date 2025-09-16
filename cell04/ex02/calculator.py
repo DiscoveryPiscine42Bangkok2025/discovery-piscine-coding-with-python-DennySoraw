@@ -1,0 +1,10 @@
+num_1 = int(input("Give me the first number: "))
+num_2 = int(input("Give me the second number: "))
+result_sum = num_1 + num_2
+result_diff = num_1 - num_2
+result_product = num_1 * num_2
+result_quotient = num_1 // num_2
+print(num_1,"+",num_2,"=",result_sum)
+print(num_1,"-",num_2,"=",result_diff)
+print(num_1,"/",num_2,"=",result_quotient)
+print(num_1,"*",num_2,"=",result_product)
