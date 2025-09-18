@@ -1,13 +1,13 @@
 def checkmate(board: str):
     board = [list(row) for row in board.strip().split('\n')]
-    if not board:
+    if not board: # เช็คว่าเป็นกระดานเปล่ามั้ย
         print("Fail")
         return
     
     size = len(board)
     king_index = None
 
-    for i in range(size):
+    for i in range(size):    # หาตำแหน่ง king
         for j in range(size):
             if board[i][j] == 'K':
                 king_index = (i, j)
@@ -15,7 +15,7 @@ def checkmate(board: str):
         if king_index:
             break
 
-    if not king_index:
+    if not king_index:  # ถ้าไม่พบ king ในกระดาน
         print("Fail")
         return
     
@@ -24,24 +24,24 @@ def checkmate(board: str):
     def check_direction(size_row, size_column, dir_row, dir_column):
         row, column = size_row + dir_row, size_column + dir_column
         while 0 <= row < size and 0 <= column < size:
-            if row == king_row and column == king_column:
+            if row == king_row and column == king_column:   # พบการโจมตี king
                 return True
-            if board[row][column] != ' ':
+            if board[row][column] != ' ':   # direction ถูกบังด้วยหมากตัวอื่น
                 return False
             row += dir_row
             column += dir_column
         return False
     
 
-    for i in range(size):
+    for i in range(size): # check หมากทุกตัวบนกระดาน
         for j in range(size):
             piece = board[i][j]
 
-            if piece == 'P':
+            if piece == 'P': # แนวทแยงด้านหน้า
                 if (i - 1 == king_row and j - 1 == king_column) or (i - 1 == king_row and j + 1 == king_column):
                     print("Success")
                     return
-            elif piece == 'R' or piece == 'Q':
+            elif piece == 'R' or piece == 'Q': # แนวตั้งและแนวนอน
                 if check_direction(i, j, 0, 1) or \
                     check_direction(i, j, 0, -1) or \
                     check_direction(i, j, 1, 0) or \
@@ -49,22 +49,11 @@ def checkmate(board: str):
                         print("Success")
                         return
 
-            if piece == 'B' or piece == 'Q':
+            if piece == 'B' or piece == 'Q': # แนวทแยง
                 if check_direction(i, j, 1, 1) or \
                     check_direction(i, j, 1, -1) or \
                     check_direction(i, j, -1, 1) or \
                     check_direction(i, j, -1, -1):
                         print("Success")
                         return
-    print("Fail")
-
-def main():
-    board = """\
-R...
-.K..
-..P.
-...."""
-    checkmate(board)
-
-if __name__ == "__main__":
-    main()
+    print("Fail") # ถ้าไม่พบการโจมตี
