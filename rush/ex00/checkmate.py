@@ -21,8 +21,8 @@ def checkmate(board: str):
     
     king_row, king_column = king_index
 
-    def check_direction(size_row, size_column, dir_row, dir_column):
-        row, column = size_row + dir_row, size_column + dir_column
+    def check_direction(start_row, start_column, dir_row, dir_column):
+        row, column = start_row + dir_row, start_column + dir_column
         while 0 <= row < size and 0 <= column < size:
             if row == king_row and column == king_column:   # พบการโจมตี king
                 return True
@@ -57,3 +57,4 @@ def checkmate(board: str):
                         print("Success")
                         return
     print("Fail") # ถ้าไม่พบการโจมตี
+
